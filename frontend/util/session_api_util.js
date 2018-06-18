@@ -1,5 +1,4 @@
 export const signup = (user) => {
-  delete user.passwordConfirmation;
   return $.ajax({
     method: "POST",
     url: "/api/users",

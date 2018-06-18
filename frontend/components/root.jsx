@@ -1,7 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
-// import App from './app';
+import Modal from "./modal/modal_container";
+import NavBar from "./navbar/navbar_container";
 
 const Root = ({ store }) => (
   <Provider store={ store }>
@@ -14,6 +15,8 @@ const Root = ({ store }) => (
 const App = () => (
   <React.Fragment>
     Hello World!
+    <Modal/>
+    <NavBar/>
   </React.Fragment>
 );
 
