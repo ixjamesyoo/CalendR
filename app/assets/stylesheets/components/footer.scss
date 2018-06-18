@@ -1,0 +1,48 @@
+.site-footer {
+  height: 150px;
+  width: 100%;
+  background: #333;
+  border-top: 1px solid rgba(0,0,0,.12);
+  display: flex;
+  align-items: center;
+}
+
+.site-footer-container {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+
+  i {
+    color: #acacac;
+    width: 20px;
+  }
+}
+
+.site-footer-blurb {
+  width: 400px;
+  display: flex;
+  align-items: center;
+
+  p {
+    font-size: 15px;
+    line-height: 22px;
+    color: #acacac;
+  }
+}
+
+.site-footer-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  li {
+    margin: 5px 0;
+  }
+
+  span {
+    color: #acacac;
+    margin-left: 5px;
+  }
+}

@@ -6,6 +6,7 @@ export default ({ loggedIn, currentUser, openModal, login, logout, history }) =>
   const logoDiv = (
       <div>
         <Link to="/" className="navbar-logo">
+          <img src={ window.images.logo } className="logo-img" alt="calendr-logo"/>
           <h1>CalendR</h1>
         </Link>
       </div>

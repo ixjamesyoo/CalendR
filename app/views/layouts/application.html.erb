@@ -17,6 +17,13 @@
       </script>
     <% end %>
 
+    <script type="text/javascript">
+      window.images = {
+        homeBackground: "<%= image_path("home_bg.jpg") %>",
+        logo: "<%= image_path("logo.png") %>",
+      }
+    </script>
+
     <%= yield %>
   </body>
 </html>

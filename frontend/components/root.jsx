@@ -6,6 +6,7 @@ import Modal from "./modal/modal_container";
 import NavBar from "./navbar/navbar_container";
 import HomePage from "./home_page/home_page";
 import Calendar from "./calendar/calendar";
+import Footer from "./footer/footer";
 
 const Root = ({ store }) => (
   <Provider store={ store }>
@@ -23,6 +24,7 @@ const App = () => (
       <AuthRoute exact path="/" component={ HomePage }/>
       <ProtectedRoute path="/my/calendar" component={ Calendar }/>
     </Switch>
+    <Footer />
   </React.Fragment>
 );
 

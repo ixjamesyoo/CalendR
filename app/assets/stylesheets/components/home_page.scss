@@ -1,0 +1,28 @@
+.home-splash {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    text-align: center;
+    color: #c2242e;
+    font-size: 30px;
+    font-weight: 550;
+    text-shadow: 1px 1px 0px #000;
+    z-index: 1;
+  }
+}
+
+.home-bg-container {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  height: 80vh;
+}
+
+.home-bg-img {
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
