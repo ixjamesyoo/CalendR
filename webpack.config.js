@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  entry: path.join(__dirname, "frontend", "app.jsx"),
+  entry: path.join(__dirname, "frontend", "calendar_app.jsx"),
   output: {
     path: path.join(__dirname, "app", "assets", "javascripts"),
     filename: "[name].bundle.js"
