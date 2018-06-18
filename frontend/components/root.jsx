@@ -14,7 +14,6 @@ const Root = ({ store }) => (
 
 const App = () => (
   <React.Fragment>
-    Hello World!
     <Modal/>
     <NavBar/>
   </React.Fragment>
