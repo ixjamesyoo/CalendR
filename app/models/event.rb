@@ -1,7 +1,21 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id       :bigint(8)        not null, primary key
+#  user_id  :integer          not null
+#  title    :string           not null
+#  start    :datetime         not null
+#  ending   :datetime         not null
+#  all_day  :integer          default(0), not null
+#  location :string
+#  notes    :text
+#
+
 class Event < ApplicationRecord
   before_validation :strip_timezone
 
-  validates :user_id, :title, :start, :ending, :all_day?, presence: true
+  validates :user_id, :title, :start, :ending, :all_day, presence: true
   validates :all_day, inclusion: { in: 0..1 }
   validate :start_before_ending
 
@@ -18,11 +32,3 @@ class Event < ApplicationRecord
     end
   end
 end
-
-# t.integer "user_id", null: false
-# t.string "title", null: false
-# t.datetime "start", null: false
-# t.datetime "end", null: false
-# t.integer "all_day?", default: 0, null: false
-# t.string "location"
-# t.text "notes"
