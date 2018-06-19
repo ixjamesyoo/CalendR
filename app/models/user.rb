@@ -7,6 +7,8 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
   attr_reader :password
 
+  has_many :events
+
   def self.generate_session_token
     token = SecureRandom::urlsafe_base64
     while User.exists?(session_token: token)
