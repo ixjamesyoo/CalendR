@@ -1,15 +1,12 @@
 import React from "react";
 import { first, last } from "lodash";
-import DayCell from "../day_cell/day_cell";
+import DayCell from "../day_cell/day_cell_container";
 
 const MONTHS = "months";
 const WEEKS = "weeks";
 const DAYS = "days";
 
-export default ({ view, dates, selected }) => {
-
-  // if (!dates) return null;
-
+export default ({ view, dates, selected, setDate }) => {
   const monthExtension = (datesArray) => {
     while (first(datesArray).day()) {
       const firstDate = first(datesArray);
@@ -32,7 +29,9 @@ export default ({ view, dates, selected }) => {
         let weekGrid = [];
 
         for (let i = 0; i < allDates.length; i++) {
-          weekGrid.push(<DayCell key={allDates[i]} date={ allDates[i] }/>);
+          weekGrid.push(<DayCell key={allDates[i]} date={ allDates[i] }
+            setDate={ setDate }
+            selected={ selected }/>);
 
           if (allDates[i].day() === 6) {
             monthGrid.push(weekGrid);

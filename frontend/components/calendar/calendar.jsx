@@ -24,6 +24,7 @@ export default class Calendar extends React.Component {
 
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
+    this.setDate = this.setDate.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +41,10 @@ export default class Calendar extends React.Component {
     this.setState({ selected: selected.add(1, view)});
   }
 
+  setDate(newDate) {
+    this.setState({ selected: newDate });
+  }
+
   headerRow() {
     const { today, selected, view } = this.state;
     if (view === MONTHS) {
@@ -50,15 +55,32 @@ export default class Calendar extends React.Component {
       return (
         <header className="calendar-header">
           <button onClick={ this.previous }>
-            <i className="fas fa-3x fa-chevron-circle-left"></i>
+            <i className="fas fa-2x fa-chevron-circle-left"></i>
           </button>
           { title }
           <button onClick={ this.next }>
-            <i className="fas fa-3x fa-chevron-circle-right"></i>
+            <i className="fas fa-2x fa-chevron-circle-right"></i>
           </button>
         </header>
       );
     }
+  }
+
+  weekdayNames() {
+    const { view } = this.state;
+
+    return view === MONTHS ? (
+      <div className="weekday-namebar">
+        <p>Sunday</p>
+        <p>Monday</p>
+        <p>Tuesday</p>
+        <p>Wednesday</p>
+        <p>Thursday</p>
+        <p>Friday</p>
+        <p>Saturday</p>
+      </div>
+    ) : null;
+
   }
 
   dates() {
@@ -81,8 +103,9 @@ export default class Calendar extends React.Component {
       <div className="calendar-master">
         <div className="calendar-container">
           { this.headerRow() }
-
-          <ViewUnit view={ view } dates={ this.dates() } selected={ selected }/>
+          { this.weekdayNames() }
+          <ViewUnit view={ view } dates={ this.dates() }
+            selected={ selected } setDate={ this.setDate }/>
         </div>
       </div>
     );
