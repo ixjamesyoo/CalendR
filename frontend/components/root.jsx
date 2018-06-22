@@ -5,7 +5,7 @@ import { AuthRoute, ProtectedRoute } from "../util/route_util";
 import Modal from "./modal/modal_container";
 import NavBar from "./navbar/navbar_container";
 import HomePage from "./home_page/home_page";
-import Calendar from "./calendar/calendar";
+import Calendar from "./calendar/calendar_container";
 import Footer from "./footer/footer";
 
 const Root = ({ store }) => (
