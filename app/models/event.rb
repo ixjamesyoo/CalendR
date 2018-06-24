@@ -28,7 +28,7 @@ class Event < ApplicationRecord
 
   def start_before_ending
     unless start < ending
-      errors[:event] < "start must be before end"
+      errors[:event] << "start must be before end"
     end
   end
 end

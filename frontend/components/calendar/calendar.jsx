@@ -48,7 +48,6 @@ export default class Calendar extends React.Component {
   headerRow() {
     const { today, selected, view } = this.state;
     if (view === MONTHS) {
-      console.log(selected.month());
       const month = `${monthNamesFull[selected.month()]}`;
       const year = selected.year();
       const title = <p className="calendar-title">{ `${month} ${year}` }</p>;

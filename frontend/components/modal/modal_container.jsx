@@ -1,15 +1,19 @@
 import { connect } from "react-redux";
-import { closeModal } from "../../actions/modal_actions";
-import Modal from "./modal.jsx";
+import { openModal, closeModal } from "../../actions/modal_actions";
+import Modal from "./modal";
 
-const mapStateToProps = ({ ui }) => {
+const mapStateToProps = ({ entities, ui }) => {
   return {
-    modal: ui.modal,
+    events: entities.events,
+    modalType: ui.modal.modalType,
+    date: ui.modal.date,
+    eventId: ui.modal.eventId
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    openModal: (...args) => dispatch(openModal(...args)),
     closeModal: () => dispatch(closeModal())
   };
 };

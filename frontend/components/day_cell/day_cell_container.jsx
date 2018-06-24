@@ -21,7 +21,7 @@ const mapStateToProps = ({ entities }, { date }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    openModal: modal => dispatch(openModal(modal)),
+    openModal: (modal, date) => dispatch(openModal(modal, date)),
   };
 };
 
