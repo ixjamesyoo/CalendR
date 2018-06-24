@@ -8,6 +8,9 @@ export default class EventForm extends React.Component {
     super(props);
     this.state = this.initialState();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateStartTime = this.updateStartTime.bind(this);
+    this.updateEndTime = this.updateEndTime.bind(this);
+
   }
 
   initialState(){
@@ -33,6 +36,20 @@ export default class EventForm extends React.Component {
     return e => this.setState({ [field]: e.currentTarget.value });
   }
 
+  updateStartTime(start_time) {
+    this.setState({ start_time });
+    if (this.state.start_time.isSameOrAfter(this.state.end_time)){
+      this.setState({ end_time: this.state.start_time.clone().add(1, "hour")});
+    }
+  }
+
+  updateEndTime(end_time) {
+    this.setState({ end_time });
+    if (this.state.end_time.isSameOrBefore(this.state.start_time)){
+      this.setState({ end_time: this.state.end_time.clone().subtract(1, "hour")});
+    }
+  }
+
   handleSubmit(e){
     e.preventDefault();
     const timeFormat = 'h:mm a';
@@ -49,8 +66,25 @@ export default class EventForm extends React.Component {
   }
 
   startTime(){
+    const timeFormat = 'h:mm a';
     return (
       <TimePicker value={ this.state.start_time }
+        onChange={ this.updateStartTime }
+        format={ timeFormat }
+        className="event-form-time"
+        popupClassName="time-options"
+        />
+    );
+  }
+
+  endTime(){
+    const timeFormat = 'h:mm a';
+    return (
+      <TimePicker value={ this.state.end_time }
+        onChange={ this.updateEndTime }
+        format={ timeFormat }
+        className="event-form-time"
+        popupClassName="time-options"
         />
     );
   }
@@ -107,6 +141,7 @@ export default class EventForm extends React.Component {
           { this.errorMessages() }
           { this.titleInput() }
           { this.startTime() }
+          { this.endTime() }
           { this.locationInput() }
           { this.notesInput() }
           { this.submitButton() }
