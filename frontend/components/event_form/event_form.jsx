@@ -1,7 +1,8 @@
 import React from "react";
 import merge from "lodash/merge";
 import moment from 'moment';
-import TimePicker from 'rc-time-picker';
+// import TimePicker from 'rc-time-picker';
+import Datetime from "react-datetime";
 
 export default class EventForm extends React.Component {
   constructor(props) {
@@ -15,14 +16,11 @@ export default class EventForm extends React.Component {
 
   initialState(){
     const { formType, date } = this.props;
-    const dateFormat = "YYYY-MM-DD";
     if (formType === "createEvent") {
       return {
         title: "",
-        start_date: date.format(dateFormat),
-        end_date: date.format(dateFormat),
-        start_time: moment().startOf("hour").add(1, "hours"),
-        end_time: moment().startOf("hour").add(2, "hours"),
+        start_datetime: moment().startOf("hour").add(1, "hours"),
+        end_datetime: moment().startOf("hour").add(2, "hours"),
         all_day: 0,
         location: "",
         notes: ""
@@ -36,26 +34,26 @@ export default class EventForm extends React.Component {
     return e => this.setState({ [field]: e.currentTarget.value });
   }
 
-  updateStartTime(start_time) {
-    this.setState({ start_time });
-    if (this.state.start_time.isSameOrAfter(this.state.end_time)){
-      this.setState({ end_time: this.state.start_time.clone().add(1, "hour")});
+  updateStartTime(start_datetime) {
+    this.setState({ start_datetime });
+    if ( start_datetime.isAfter(this.state.end_datetime)){
+      this.setState({end_datetime: start_datetime.clone().add(1, "hours")});
     }
   }
 
-  updateEndTime(end_time) {
-    this.setState({ end_time });
-    if (this.state.end_time.isSameOrBefore(this.state.start_time)){
-      this.setState({ end_time: this.state.end_time.clone().subtract(1, "hour")});
+  updateEndTime(end_datetime) {
+    this.setState({ end_datetime, start_datetime: end_datetime.clone().subtract(1, "hours") });
+    if ( end_datetime.isBefore(this.state.start_datetime)){
+      this.setState({start_datetime: end_datetime.clone().add(1, "hours")});
     }
   }
 
   handleSubmit(e){
     e.preventDefault();
-    const timeFormat = 'h:mm a';
-    const { title, all_day, location, notes, start_time, end_time, start_date, end_date }  = this.state;
-    const start = `${start_date} ${start_time.format(timeFormat)}`;
-    const ending = `${end_date} ${end_time.format(timeFormat)}`;
+    const format = "YYYY-MM-DD h:mm a";
+    const { title, all_day, location, notes, start_datetime, end_datetime }  = this.state;
+    const start = `${start_datetime.format(format)}`;
+    const ending = `${end_datetime.format(format)}`;
     let event = merge({}, { title, all_day, location, notes, start, ending });
 
     if (this.props.formType === "updateEvent") {
@@ -67,25 +65,33 @@ export default class EventForm extends React.Component {
 
   startTime(){
     const timeFormat = 'h:mm a';
+    const dateFormat = "YYYY-MM-DD";
     return (
-      <TimePicker value={ this.state.start_time }
-        onChange={ this.updateStartTime }
-        format={ timeFormat }
-        className="event-form-time"
-        popupClassName="time-options"
-        />
+      <label> Start
+        <Datetime value={ this.state.start_datetime }
+          onChange={ this.updateStartTime }
+          timeFormat={ timeFormat }
+          dateFormat={ dateFormat }
+          inputProps={ {disabled: true}}
+          className="event-form-datetime"
+          />
+      </label>
     );
   }
 
   endTime(){
     const timeFormat = 'h:mm a';
+    const dateFormat = "YYYY-MM-DD";
     return (
-      <TimePicker value={ this.state.end_time }
-        onChange={ this.updateEndTime }
-        format={ timeFormat }
-        className="event-form-time"
-        popupClassName="time-options"
-        />
+      <label> End
+        <Datetime value={ this.state.end_datetime }
+          onChange={ this.updateEndTime }
+          format={ timeFormat }
+          dateFormat={ dateFormat }
+          inputProps={ {disabled: true}}
+          className="event-form-datetime"
+          />
+      </label>
     );
   }
 
@@ -137,7 +143,7 @@ export default class EventForm extends React.Component {
   render() {
     return (
       <div className="event-form-container">
-        <form onSubmit={ this.handleSubmit }>
+        <form className="event-form" onSubmit={ this.handleSubmit }>
           { this.errorMessages() }
           { this.titleInput() }
           { this.startTime() }

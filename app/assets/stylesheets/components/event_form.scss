@@ -2,6 +2,54 @@
   background: #f7f7f7;
 }
 
-.time-options {
-  z-index: 3;
+.event-form {
+  border-radius: 5px;
+  border: 1px solid rgba(0,0,0,0.12);
+  padding: 25px 30px;
+  width: 400px;
+  height: 400px;
+  overflow: scroll;
+
+  .session-form-input {
+    display: block;
+    width: 380px;
+  }
+
+  .session-submit {
+    width: 380px;
+    background: #237b98;
+  }
+
+  .session-submit:hover {
+    background: #1c657d;
+  }
+
+  label {
+    padding-left: 10px;
+    color: #666;
+  }
+}
+
+.event-form-datetime {
+  width: 400px;
+  margin-bottom: 15px;
+
+  .form-control {
+    width: 380px;
+    border: 1px solid #eee;
+    color:  #237b98;
+    padding: 10px;
+    font-size: 14;
+  }
+
+  .rdtPicker {
+    margin-top: 10px;
+    margin-left: 120px;
+  }
+}
+
+.rdtTimeToggle {
+  text-align: center;
+  padding: 10px 0;
+  border: 1px solid #eee;
 }

@@ -12,7 +12,7 @@ const mapStateToProps = ({ entities }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    openModal: modal => dispatch(openModal(modal)),
+    openModal: (...args) => dispatch(openModal(...args)),
     fetchEvents: () => dispatch(fetchEvents())
   };
 };

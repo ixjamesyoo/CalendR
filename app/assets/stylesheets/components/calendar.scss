@@ -16,13 +16,18 @@
   padding: 0 5px;
   background: #9ec7d6;
 
-  button {
-    cursor: pointer;
-  }
-
   .calendar-title {
     font-size: 38px;
   }
+
+  .calendar-header-middle {
+    display: flex;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+
 }
 
 .calendar-month {

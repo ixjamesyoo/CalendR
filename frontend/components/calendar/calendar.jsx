@@ -25,6 +25,7 @@ export default class Calendar extends React.Component {
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
     this.setDate = this.setDate.bind(this);
+    this.createEventModal = this.createEventModal.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +40,11 @@ export default class Calendar extends React.Component {
   next() {
     const { selected, view } = this.state;
     this.setState({ selected: selected.add(1, view)});
+  }
+
+  createEventModal() {
+    const { openModal } = this.props;
+    openModal("createEvent", this.state.selected);
   }
 
   setDate(newDate) {
@@ -56,7 +62,12 @@ export default class Calendar extends React.Component {
           <button onClick={ this.previous }>
             <i className="fas fa-2x fa-chevron-circle-left"></i>
           </button>
-          { title }
+          <div className="calendar-header-middle">
+            { title }
+            <button onClick={ this.createEventModal }>
+              <i className="fa fa-lg fa-plus-circle" aria-hidden="true"></i>
+            </button>
+          </div>
           <button onClick={ this.next }>
             <i className="fas fa-2x fa-chevron-circle-right"></i>
           </button>

@@ -45,7 +45,7 @@ export default ({ events, modalType, date, eventId, openModal, closeModal }) => 
               <button onClick={ closeModal }
                 className="close-button">&times;</button>
               <h1>{ date.format("dddd, MMMM Do YYYY") }</h1>
-              <button onClick={ createEvent }>Add Event</button>
+              <button className="day-view-add-event" onClick={ createEvent }>Add Event</button>
               <ul>
                 { detailedEventOverview() }
               </ul>
