@@ -14,8 +14,7 @@ export default class EventForm extends React.Component {
   }
 
   initialState(){
-    const { formType } = this.props;
-    if (formType === "createEvent") {
+    if (this.props.formType === "createEvent") {
       const { date } = this.props;
       return {
         title: "",

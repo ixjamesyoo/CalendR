@@ -5,14 +5,10 @@ export default ({ date, selected, setDate, events, openModal }) => {
 
   function handleClick() {
     setDate(date);
-    // if (selected.month() === date.month()) {
-    //   openModal("dayOverview", date);
-    // }
   }
 
   function handleDoubleClick() {
     openModal("dayOverview", date);
-
   }
 
   function eventOverview() {
