@@ -123,7 +123,7 @@ export default class EventForm extends React.Component {
 
   locationInput(){
     return (
-      <input type="text" value={ this.state.location}
+      <input type="text" value={ this.state.location }
         onChange={ this.updateField("location") }
         placeholder="Location"
         className="session-form-input"/>

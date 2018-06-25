@@ -7,14 +7,14 @@ export default ({ event, closeModal, deleteEvent, openUpdateModal }) => {
   }
 
   function notes() {
-    return event.notes ? <p><strong>Notes:</strong> {event.location}</p> : null;
+    return event.notes ? <p><strong>Notes:</strong> {event.notes}</p> : null;
   }
 
 
   return (
     <div className="event-detail-container">
       <header>
-        {event.title}
+        <h2>{event.title}</h2>
         <section>
           <i className="fas fa-edit" onClick={ openUpdateModal }/>
           <i className="fas fa-trash-alt" onClick={ deleteEvent }/>
