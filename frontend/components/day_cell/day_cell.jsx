@@ -4,7 +4,7 @@ import moment from "moment";
 export default ({ date, selected, setDate, events, openModal }) => {
 
   function handleClick() {
-    if (selected.isSame(date, "day")) {
+    if (selected.isSame(date, "month")) {
       openModal("dayOverview", date);
     }
     setDate(date);
