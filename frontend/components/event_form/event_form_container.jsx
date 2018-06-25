@@ -7,9 +7,10 @@ import {
 import { openModal, closeModal } from '../../actions/modal_actions';
 import EventForm from "./event_form";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ entities, errors }, { eventId }) => {
   return {
-    errors: state.errors.event,
+    event: entities.events[eventId],
+    errors: errors.event,
   };
 };
 

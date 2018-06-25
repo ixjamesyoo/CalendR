@@ -1,4 +1,4 @@
-json.extract! event, :id, :title, :start, :ending, :all_day
+json.extract! event, :id, :title, :start, :ending
 
 if event.location
   json.extract! event, :location

@@ -11,23 +11,29 @@ export default class EventForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateStartTime = this.updateStartTime.bind(this);
     this.updateEndTime = this.updateEndTime.bind(this);
-
   }
 
   initialState(){
-    const { formType, date } = this.props;
+    const { formType } = this.props;
     if (formType === "createEvent") {
+      const { date } = this.props;
       return {
         title: "",
-        start_datetime: moment().startOf("hour").add(1, "hours"),
-        end_datetime: moment().startOf("hour").add(2, "hours"),
-        all_day: 0,
+        start_datetime: date.clone().startOf("hour"),
+        end_datetime: date.clone().startOf("hour").add(1, "hours"),
         location: "",
         notes: ""
       };
+    } else {
+      const { event } = this.props;
+      return {
+        title: event.title,
+        start_datetime: moment(event.start),
+        end_datetime: moment(event.ending),
+        location: event.location,
+        notes: event.notes
+      };
     }
-    // else {
-    // }
   }
 
   updateField(field) {
@@ -42,19 +48,19 @@ export default class EventForm extends React.Component {
   }
 
   updateEndTime(end_datetime) {
-    this.setState({ end_datetime, start_datetime: end_datetime.clone().subtract(1, "hours") });
+    this.setState({ end_datetime });
     if ( end_datetime.isBefore(this.state.start_datetime)){
-      this.setState({start_datetime: end_datetime.clone().add(1, "hours")});
+      this.setState({start_datetime: end_datetime.clone().subtract(1, "hours")});
     }
   }
 
   handleSubmit(e){
     e.preventDefault();
-    const format = "YYYY-MM-DD h:mm a";
-    const { title, all_day, location, notes, start_datetime, end_datetime }  = this.state;
+    const format = "YYYY-MM-DD h:mm a Z";
+    const { title, location, notes, start_datetime, end_datetime }  = this.state;
     const start = `${start_datetime.format(format)}`;
     const ending = `${end_datetime.format(format)}`;
-    let event = merge({}, { title, all_day, location, notes, start, ending });
+    let event = merge({}, { title, location, notes, start, ending });
 
     if (this.props.formType === "updateEvent") {
       event = merge({}, event, {id: this.props.eventId});
@@ -72,7 +78,7 @@ export default class EventForm extends React.Component {
           onChange={ this.updateStartTime }
           timeFormat={ timeFormat }
           dateFormat={ dateFormat }
-          inputProps={ {disabled: true}}
+          inputProps={{ disabled: true }}
           className="event-form-datetime"
           />
       </label>
@@ -88,7 +94,7 @@ export default class EventForm extends React.Component {
           onChange={ this.updateEndTime }
           format={ timeFormat }
           dateFormat={ dateFormat }
-          inputProps={ {disabled: true}}
+          inputProps={{ disabled: true }}
           className="event-form-datetime"
           />
       </label>
@@ -112,7 +118,7 @@ export default class EventForm extends React.Component {
     return (
       <input type="text" value={ this.state.title }
         onChange={ this.updateField("title") }
-        placeholder="Event Title/Description"
+        placeholder="Event Title/Description (Required)"
         className="session-form-input"/>
     );
   }

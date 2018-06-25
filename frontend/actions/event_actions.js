@@ -66,6 +66,7 @@ export const updateEvent = event => dispatch => {
 
 export const deleteEvent = id => dispatch => {
   return EventAPIUtil.deleteEvent(id).then(event => {
+    dispatch(closeModal());
     dispatch(removeEvent(event));
   }, err => {
     dispatch(receiveEventErrors(err.responseJSON));

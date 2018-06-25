@@ -1,8 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
 import moment from "moment";
+import { connect } from "react-redux";
 import { openModal } from "../../actions/modal_actions";
 import { fetchEvents } from "../../actions/event_actions";
+import { datetimeSort } from "../../util/date_util";
 import DayCell from "./day_cell";
 
 
@@ -15,7 +16,7 @@ const mapStateToProps = ({ entities }, { date }) => {
   });
 
   return {
-    events: relevantEvents
+    events: relevantEvents.sort(datetimeSort)
   };
 };
 

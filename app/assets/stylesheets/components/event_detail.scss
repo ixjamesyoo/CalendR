@@ -1,0 +1,44 @@
+.event-detail-container {
+  background: #f7f7f7;
+  border-radius: 5px;
+  border: 1px solid rgba(0,0,0,0.12);
+  width: 400px;
+  height: 400px;
+  overflow: scroll;
+  padding: 20px 30px;
+  box-sizing: border-box;
+
+  p {
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+
+  header {
+    font-weight: 550;
+    font-size: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 7px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  strong {
+    font-size: 18px;
+    margin-right: 2px;
+    color: #237b98;
+  }
+
+  i {
+    color: #a6a6a6;
+    cursor: pointer;
+  }
+
+  i:last-of-type{
+    margin-left: 25px;
+  }
+
+  i:hover {
+    color: #000;
+  }
+}

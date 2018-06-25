@@ -40,7 +40,7 @@ class Api::EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:title, :start, :ending, :all_day, :location, :notes)
+    params.require(:event).permit(:title, :start, :ending, :location, :notes)
   end
 
   def ensure_current_user_is_authorized
