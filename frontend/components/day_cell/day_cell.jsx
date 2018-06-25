@@ -4,11 +4,10 @@ import moment from "moment";
 export default ({ date, selected, setDate, events, openModal }) => {
 
   function handleClick() {
+    if (selected.isSame(date, "day")) {
+      openModal("dayOverview", date);
+    }
     setDate(date);
-  }
-
-  function handleDoubleClick() {
-    openModal("dayOverview", date);
   }
 
   function eventOverview() {
@@ -29,9 +28,8 @@ export default ({ date, selected, setDate, events, openModal }) => {
     );
   }
 
-
   return (
-    <div onClick={ handleClick }  onDoubleClick={ handleDoubleClick } className="calendar-day">
+    <div onClick={ handleClick } className="calendar-day">
       { dateTitle() }
       { eventOverview() }
     </div>

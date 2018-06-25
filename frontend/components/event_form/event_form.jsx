@@ -1,7 +1,6 @@
 import React from "react";
 import merge from "lodash/merge";
 import moment from 'moment';
-// import TimePicker from 'rc-time-picker';
 import Datetime from "react-datetime";
 
 export default class EventForm extends React.Component {
