@@ -25,6 +25,7 @@ export default class Calendar extends React.Component {
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
     this.setDate = this.setDate.bind(this);
+    this.setView = this.setView.bind(this);
     this.createEventModal = this.createEventModal.bind(this);
   }
 
@@ -51,35 +52,57 @@ export default class Calendar extends React.Component {
     this.setState({ selected: newDate });
   }
 
+  setView(view) {
+    return () => this.setState({ view });
+  }
+
   headerRow() {
     const { today, selected, view } = this.state;
-    if (view === MONTHS) {
+
+    let title;
+    if (view === MONTHS || view === WEEKS) {
       const month = `${monthNamesFull[selected.month()]}`;
       const year = selected.year();
-      const title = <p className="calendar-title">{ `${month} ${year}` }</p>;
-      return (
-        <header className="calendar-header">
-          <button onClick={ this.previous }>
-            <i className="fas fa-2x fa-chevron-circle-left"></i>
-          </button>
-          <div className="calendar-header-middle">
-            { title }
-            <button onClick={ this.createEventModal }>
-              <i className="fa fa-lg fa-plus-circle" aria-hidden="true"></i>
-            </button>
-          </div>
-          <button onClick={ this.next }>
-            <i className="fas fa-2x fa-chevron-circle-right"></i>
-          </button>
-        </header>
-      );
+      title = `${month} ${year}`;
     }
+    return (
+      <header className="calendar-header">
+        <button onClick={ this.previous }>
+          <i className="fas fa-2x fa-chevron-circle-left"></i>
+        </button>
+        <div className="calendar-header-middle">
+          <p className="calendar-title">{ title }</p>
+          <button onClick={ this.createEventModal }>
+            <i className="fa fa-lg fa-plus-circle" aria-hidden="true"></i>
+          </button>
+          <div className="calendar-buttons">
+            { this.viewButtons() }
+          </div>
+        </div>
+        <button onClick={ this.next }>
+          <i className="fas fa-2x fa-chevron-circle-right"></i>
+        </button>
+      </header>
+    );
+  }
+
+  viewButtons() {
+    const { view } = this.state;
+    const activeMonth = view === MONTHS ? "active-view" : "";
+    const activeWeek = view === WEEKS ? "active-view" : "";
+
+    return (
+      <React.Fragment>
+        <button className={`view-button ${activeMonth}`} onClick={ this.setView(MONTHS) }>Month</button>
+        <button className={`view-button ${activeWeek}`} onClick={ this.setView(WEEKS) }>Week</button>
+      </React.Fragment>
+    );
   }
 
   weekdayNames() {
     const { view } = this.state;
 
-    return view === MONTHS ? (
+    return view === MONTHS || view === WEEKS ? (
       <div className="weekday-namebar">
         <p>Sunday</p>
         <p>Monday</p>
@@ -90,7 +113,6 @@ export default class Calendar extends React.Component {
         <p>Saturday</p>
       </div>
     ) : null;
-
   }
 
   dates() {
@@ -99,6 +121,11 @@ export default class Calendar extends React.Component {
     const dates = [];
     if (view === MONTHS) {
       for (let counter = selected.clone().startOf("month"); counter.month() === selected.month(); counter.add(1, "day")) {
+        const _date = counter.clone();
+        dates.push(_date);
+      }
+    } else if (view === WEEKS) {
+      for (let counter = selected.clone().startOf("week"); counter.week() === selected.week(); counter.add(1, "day")) {
         const _date = counter.clone();
         dates.push(_date);
       }

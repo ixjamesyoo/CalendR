@@ -23,7 +23,7 @@
   .calendar-header-middle {
     display: flex;
 
-    button {
+    i {
       margin-left: 10px;
     }
   }
@@ -93,4 +93,26 @@
   background: #a6a6a6;
   padding: 0 4px;
   border-radius: 2px;
+}
+
+.calendar-buttons {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+
+  .view-button {
+    height: 22px;
+    border: 1px solid rgba(0,0,0,0.12);
+    box-shadow: 1px 1px 1px 0 #000;
+    background: #237BB3;
+    border-radius: 5px;
+    color: white;
+    padding: 0 10px;
+    margin-left: 10px;
+  }
+
+  .active-view {
+    background: #1c627a;
+    box-shadow: none;
+  }
 }
