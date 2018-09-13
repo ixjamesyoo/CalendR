@@ -34,7 +34,8 @@
     "postinstall": "webpack --mode=production"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/setup_tests.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/setup_tests.js",
+    "transformIgnorePatterns": ["node_modules/enzyme"]
   },
   "keywords": [],
   "author": "",
